@@ -3,6 +3,7 @@ import PDFDocument from 'pdfkit';
 import { supabase } from '../config/database.js';
 import axios from 'axios';
 
+
 // Generate PDF Report
 export const generateReport = async (req: Request, res: Response) => {
   try {
@@ -80,7 +81,7 @@ export const generateReport = async (req: Request, res: Response) => {
     const scoreColor = transparencyData.score >= 80 ? '#48bb78' : 
                        transparencyData.score >= 60 ? '#f6ad55' : '#f56565';
     doc.fontSize(14).fillColor(scoreColor);
-    doc.text(`Overall Score: ${transparencyData.score}/100`, { bold: true });
+    doc.font('Helvetica-Bold').text(`Overall Score: ${transparencyData.score}/100`).font('Helvetica');
     doc.fontSize(12).fillColor('#4a5568');
     doc.text(`Grade: ${transparencyData.grade}`);
     doc.moveDown(1);
@@ -138,6 +139,7 @@ export const generateReport = async (req: Request, res: Response) => {
   }
 };
 
+
 // Save report metadata to database
 export const saveReport = async (req: Request, res: Response) => {
   try {
@@ -162,6 +164,7 @@ export const saveReport = async (req: Request, res: Response) => {
     });
   }
 };
+
 
 // Get report by product ID
 export const getReportByProductId = async (req: Request, res: Response) => {
