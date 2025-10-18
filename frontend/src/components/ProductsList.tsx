@@ -81,7 +81,9 @@ const ProductsList: React.FC = () => {
 
   const downloadReport = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/reports/generate/${id}`);
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const response = await fetch(`${API_URL}/reports/generate/${id}`);
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');

@@ -28,7 +28,8 @@ const EditProduct: React.FC = () => {
 
   const fetchProduct = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${id}`);
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const response = await fetch(`${API_URL}/products/${id}`);
       const data = await response.json();
       
       if (data.success) {
@@ -60,7 +61,8 @@ const EditProduct: React.FC = () => {
     setSaving(true);
 
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+      const response = await fetch(`${API_URL}/products/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
